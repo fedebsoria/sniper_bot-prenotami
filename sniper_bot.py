@@ -25,7 +25,11 @@ def web_driver_sign_in(url, u_mail, u_password, driver):
     prenota = driver.find_element("id", "advanced").click()
     sleep(5)
     cittadinanza_per_discendenza = driver.find_element(By.XPATH, "//a[contains(@href, '/Services/Booking/224')]").click()
-    
+    sleep(5)
+    no_appointment = None
+    no_appointment = driver.find_element(By.XPATH, "//*[contains(text(),'Al momento non ci sono date disponibili per il servizio richiesto')]")
+    if no_appointment != None:
+        print("No hay turno")
 
     
 
