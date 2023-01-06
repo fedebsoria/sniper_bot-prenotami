@@ -8,8 +8,18 @@ from selenium.webdriver.common.keys import Keys
 
 import pyautogui
 
+import time
+
 
 #session = HTMLSession()
+
+#takes screenshots
+
+def screenshot():
+    daystr = time.strftime("%Y%m%d-%H%M%S")
+    myScreenshot = pyautogui.screenshot()
+    myScreenshot.save(r"/home/fede/Desktop/{}.jpg".format(daystr))
+    return myScreenshot
 
 #enter the web and sign in
 
@@ -31,12 +41,7 @@ def web_driver_sign_in(url, u_mail, u_password, driver):
     no_appointment = None
     no_appointment = driver.find_element(By.XPATH, "//*[contains(text(),'Al momento non ci sono date disponibili per il servizio richiesto')]")
     if no_appointment != None:
-        return no_appointment = True
-
-def screenshot():
-    myScreenshot = pyautogui.screenshot()
-    
-
+        return screenshot()  
 
 
     """def check_stock(url):
