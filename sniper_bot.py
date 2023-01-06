@@ -23,6 +23,10 @@ def web_driver_sign_in(url, u_mail, u_password, driver):
     password.send_keys(Keys.ENTER)
     sleep(3)
     prenota = driver.find_element("id", "advanced").click()
+    sleep(5)
+    cittadinanza_per_discendenza = driver.find_element(By.XPATH, "//a[contains(@href, '/Services/Booking/224')]").click()
+    
+
     
 
 
@@ -57,9 +61,8 @@ def main():
     driver = webdriver.Firefox()
 
     web_driver_sign_in(url, u_mail, u_password, driver)
-    #check_appoitment(driver)
-    #stock_checked = False
-    #web_driver(url, stock_checked)
+
+    
 
 
 
