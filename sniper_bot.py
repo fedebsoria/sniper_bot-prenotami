@@ -6,6 +6,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+import pyautogui
+
 
 #session = HTMLSession()
 
@@ -29,8 +31,10 @@ def web_driver_sign_in(url, u_mail, u_password, driver):
     no_appointment = None
     no_appointment = driver.find_element(By.XPATH, "//*[contains(text(),'Al momento non ci sono date disponibili per il servizio richiesto')]")
     if no_appointment != None:
-        print("No hay turno")
+        return no_appointment = True
 
+def screenshot():
+    myScreenshot = pyautogui.screenshot()
     
 
 
