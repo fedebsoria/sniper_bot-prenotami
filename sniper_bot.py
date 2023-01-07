@@ -1,4 +1,5 @@
 from time import sleep
+import pathlib
 import os
 from requests_html import HTMLSession, AsyncHTMLSession
 from getpass import getpass
@@ -15,17 +16,11 @@ starting_web_browser = "Abriendo el navegador. POR FAVOR NO CERRAR hasta que se 
 #takes screenshots
 
 def screenshot():
-    user = os.getlogin()
     daystr = time.strftime("%Y%m%d-%H%M%S")
     myScreenshot = pyautogui.screenshot()
-    if os.name == "nt":
-        user_screenshot_path = "c:/Users/{}/Desktop/{}.jpg".format(user, daystr)
-        myScreenshot.save(user_screenshot_path)
-        print("Screenshot guardado en {}".format(user_screenshot_path))
-    else:
-        user_screenshot_path_unix = "/home/{}/Desktop/{}.jpg".format(user, daystr)
-        myScreenshot.save(user_screenshot_path_unix)
-        print("Screenshot guardado en {}".format(user_screenshot_path_unix))
+    user_screenshot_path = "{}/Desktop/{}.jpg".format(pathlib.Path.home(), daystr)
+    myScreenshot.save(user_screenshot_path)
+    print("Screenshot guardado en {}".format(user_screenshot_path))
     
     return myScreenshot
 

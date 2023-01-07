@@ -1883,3 +1883,41 @@ JavaScript error: https://prenotami.esteri.it/, line 159: TypeError: $(...).html
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://prenotami.esteri.it."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://prenotami.esteri.it."
 1673123557757	Marionette	INFO	Stopped listening on port 35421
+1673126428521	geckodriver	INFO	Listening on 127.0.0.1:45723
+1673126428943	mozrunner::runner	INFO	Running command: "/snap/firefox/current/firefox.launcher" "--marionette" "--remote-debugging-port" "56793" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilenDOeGI"
+Gtk-Message: 22:20:28.989: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+amdgpu: os_same_file_description couldn't determine if two DRM fds reference the same file description.
+If they do, bad things may happen!
+1673126430059	Marionette	INFO	Marionette enabled
+1673126430065	Marionette	INFO	Listening on port 45009
+ATTENTION: default value of option mesa_glthread overridden by environment.
+Read port: 45009
+WebDriver BiDi listening on ws://127.0.0.1:56793
+1673126430254	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilenDOeGI/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:56793/devtools/browser/1cd66b54-762f-4581-a1b3-940ad3b636dd
+JavaScript error: https://prenotami.esteri.it/, line 159: TypeError: $(...).html() is undefined
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://prenotami.esteri.it."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://prenotami.esteri.it."
+1673126441843	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1673126581955	geckodriver	INFO	Listening on 127.0.0.1:44613
+1673126582358	mozrunner::runner	INFO	Running command: "/snap/firefox/current/firefox.launcher" "--marionette" "--remote-debugging-port" "45405" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilelPqeWz"
+Gtk-Message: 22:23:02.401: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+amdgpu: os_same_file_description couldn't determine if two DRM fds reference the same file description.
+If they do, bad things may happen!
+1673126583529	Marionette	INFO	Marionette enabled
+1673126583537	Marionette	INFO	Listening on port 35819
+Read port: 35819
+ATTENTION: default value of option mesa_glthread overridden by environment.
+WebDriver BiDi listening on ws://127.0.0.1:45405
+1673126583754	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilelPqeWz/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:45405/devtools/browser/7475a926-0884-4dce-a224-96852846bcda
+JavaScript error: https://prenotami.esteri.it/, line 159: TypeError: $(...).html() is undefined
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://prenotami.esteri.it."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://prenotami.esteri.it."
+1673126603959	Marionette	INFO	Stopped listening on port 35819
