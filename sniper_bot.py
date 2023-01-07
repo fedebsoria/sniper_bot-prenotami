@@ -1,5 +1,5 @@
 from time import sleep
-
+import os
 from requests_html import HTMLSession, AsyncHTMLSession
 
 from selenium import webdriver
@@ -16,9 +16,13 @@ import time
 #takes screenshots
 
 def screenshot():
+    user = os.getlogin()
     daystr = time.strftime("%Y%m%d-%H%M%S")
     myScreenshot = pyautogui.screenshot()
-    myScreenshot.save(r"/home/fede/Desktop/{}.jpg".format(daystr))
+    if os.name == "nt":
+        myScreenshot.save(r"c:/Users/{}/Desktop/{}.jpg".format(user, daystr))
+    else:
+        myScreenshot.save(r"/home/fede/Desktop/{}.jpg".format(daystr))
     return myScreenshot
 
 #enter the web and sign in
