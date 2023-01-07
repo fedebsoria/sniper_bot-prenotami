@@ -5,7 +5,7 @@ from getpass import getpass
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-
+from pyautogui import screenshot
 import pyautogui
 
 import time
@@ -68,6 +68,8 @@ def main():
     driver = webdriver.Firefox()
 
     web_driver_sign_in(url, u_mail, u_password, driver)
+
+    driver.close()
 
     
 

@@ -1844,3 +1844,42 @@ JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 703: Error: Pha
 JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 703: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
 JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 703: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
 JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 703: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
+1673121803868	geckodriver	INFO	Listening on 127.0.0.1:34823
+1673121804279	mozrunner::runner	INFO	Running command: "/snap/firefox/current/firefox.launcher" "--marionette" "--remote-debugging-port" "50947" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileH4cKok"
+Gtk-Message: 21:03:24.323: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+amdgpu: os_same_file_description couldn't determine if two DRM fds reference the same file description.
+If they do, bad things may happen!
+1673121805399	Marionette	INFO	Marionette enabled
+1673121805407	Marionette	INFO	Listening on port 44889
+Read port: 44889
+ATTENTION: default value of option mesa_glthread overridden by environment.
+WebDriver BiDi listening on ws://127.0.0.1:50947
+1673121805636	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileH4cKok/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:50947/devtools/browser/a7e057ec-1587-4524-a3aa-a448a6ddadac
+JavaScript error: https://prenotami.esteri.it/, line 159: TypeError: $(...).html() is undefined
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://prenotami.esteri.it."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://prenotami.esteri.it."
+1673121841227	Marionette	INFO	Stopped listening on port 44889
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1673123535485	geckodriver	INFO	Listening on 127.0.0.1:46347
+1673123535871	mozrunner::runner	INFO	Running command: "/snap/firefox/current/firefox.launcher" "--marionette" "--remote-debugging-port" "33223" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile9jk6LA"
+Gtk-Message: 21:32:15.922: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+amdgpu: os_same_file_description couldn't determine if two DRM fds reference the same file description.
+If they do, bad things may happen!
+1673123536973	Marionette	INFO	Marionette enabled
+1673123536980	Marionette	INFO	Listening on port 35421
+ATTENTION: default value of option mesa_glthread overridden by environment.
+Read port: 35421
+WebDriver BiDi listening on ws://127.0.0.1:33223
+1673123537174	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile9jk6LA/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:33223/devtools/browser/c77e7bc1-f9f5-482f-9140-c4b74b54a4ee
+JavaScript error: https://prenotami.esteri.it/, line 159: TypeError: $(...).html() is undefined
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://prenotami.esteri.it."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://prenotami.esteri.it."
+1673123557757	Marionette	INFO	Stopped listening on port 35421
