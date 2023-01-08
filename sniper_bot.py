@@ -53,18 +53,21 @@ def web_driver_sign_in(url, u_mail, u_password, driver):
     password.send_keys(u_password)
     password.send_keys(Keys.ENTER)
     sleep(3)
-    prenota = driver.find_element("id", "advanced").click()
-    sleep(3)
-    cittadinanza_per_discendenza = driver.find_element(By.XPATH, "//a[contains(@href, '/Services/Booking/224')]").click()
-    sleep(3)
-    no_appointment = None
-    no_appointment = driver.find_element(By.XPATH, "//*[contains(text(),'Al momento non ci sono date disponibili per il servizio richiesto')]")
-    if no_appointment != None:
-        return screenshot()
-        sleep(120)
-    else:
-        print("Algo salió mal o hay turno para el tramite. Seguro que algo salió mal.")  
- 
+    #log_in_error = driver.find_element("id", "login-password-error")
+    try:
+        prenota = driver.find_element("id", "advanced").click()
+        sleep(3)
+        cittadinanza_per_discendenza = driver.find_element(By.XPATH, "//a[contains(@href, '/Services/Booking/224')]").click()
+        sleep(3)
+        no_appointment = None
+        no_appointment = driver.find_element(By.XPATH, "//*[contains(text(),'Al momento non ci sono date disponibili per il servizio richiesto')]")
+        try:
+            return screenshot()
+        except Exception:
+            print("Algo salió mal o hay turno para el tramite. Seguro que algo salió mal.")  
+    except Exception:
+        print("Usuario o contraseña incorrectos")
+        os.remove("user_credentials_file")
 
 def main(): 
     #user is store in [0] and password is store in [1]
@@ -85,9 +88,9 @@ def main():
 
     user_credentials = read_user_credentials()
     
-    #user input user and password
+    #the user is the e-mail and is store here:
     u_mail = user_credentials[0]  
-    #martimicaela96@gmail.com
+    #the password is at least 8 characters and is store here:
     u_password = user_credentials[1]
     #"Toby2903-"
     print(starting_web_browser)
