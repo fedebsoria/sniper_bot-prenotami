@@ -93,7 +93,7 @@ def main():
     u_mail = user_credentials[0]  
     #the password is at least 8 characters and is store here:
     u_password = user_credentials[1]
-    #"Toby2903-"
+    
     print(starting_web_browser)
 
     url = "https://prenotami.esteri.it/"
