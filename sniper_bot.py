@@ -118,7 +118,7 @@ def main():
 if __name__ == "__main__":
     main()
     
-    schedule.every(3).minutes.do(main)
+    schedule.every(24).hour.do(main)
 
     while True:
         schedule.run_pending()
