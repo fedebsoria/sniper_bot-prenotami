@@ -3,10 +3,15 @@ geckodriver-v0.32.0-linux64.tar.gz
 geckodriver-v0.32.0-linux64.tar.gz.asc
 geckodriver.log
 user_credentials_file
+sniper_bot.spec
 
 /.vscode
 
 /.idea
+
+/build
+
+/dist
 
 
 
