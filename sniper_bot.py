@@ -2,6 +2,7 @@ import os
 import pathlib
 import pickle
 import time
+import schedule
 from getpass import getpass
 from time import sleep
 
@@ -72,7 +73,7 @@ def web_driver_sign_in(url, u_mail, u_password, driver):
 def main(): 
     #user is store in [0] and password is store in [1]
     user_credentials = []
-
+    #check if exist user_credentials_file and if it doesn't ask for the credentials
     if file_exist("user_credentials_file") != True:
         u_email = input("Ingrese el usuario:\n")
         u_password = getpass("Ingrese la contraseña:\n")
@@ -83,7 +84,7 @@ def main():
         print("Usuario y Contraseña ingresados")
         pass
 
-
+    
     get_user_credentials(user_credentials)
 
     user_credentials = read_user_credentials()
@@ -102,10 +103,24 @@ def main():
 
     web_driver_sign_in(url, u_mail, u_password, driver)
 
+    
+    
     driver.close()
+
+
+
+    
+
+        
 
     
 
 if __name__ == "__main__":
     main()
+    
+    schedule.every(3).minutes.do(main)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
