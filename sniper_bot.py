@@ -8,7 +8,7 @@ from time import sleep
 
 import pyautogui
 from pyautogui import screenshot
-from requests_html import AsyncHTMLSession, HTMLSession
+ # type: ignore # type: ignorefrom requests_html import AsyncHTMLSession, HTMLSession
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
