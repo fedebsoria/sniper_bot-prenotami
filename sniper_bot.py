@@ -2,24 +2,35 @@ import os
 import pathlib
 import pickle
 import time
-import schedule
 from getpass import getpass
+from os.path import exists as file_exist
 from time import sleep
 
 import pyautogui
+import PySimpleGUI as sg
+import schedule
 from pyautogui import screenshot
- # type: ignore # type: ignorefrom requests_html import AsyncHTMLSession, HTMLSession
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from os.path import exists as file_exist
+
+  #type: ignorefrom pyautogui import screenshot
 
 starting_web_browser = "Abriendo el navegador. POR FAVOR NO CERRAR hasta que se haya hecho el screenshot\n"
 user_credentials = []
 
+#layout for the UI
+sg.theme('DarkAmber')
+
+layout = [ [sg.Text("Sniper bot para prenotami."),],
+           [sg.Text("Usuario:"), sg.InputText(key="-user_email-")],
+           [sg.Text("Contraseña:"), sg.InputText(password_char="*", key="-user_password-")],
+           [sg.Button("Empezar", key="-start-", button_color="green"), sg.Button("Cerrar", key="-stop-")]
+        ]
+
 
 #check if there're no user_credentials
-def get_user_credentials(user_credentials):
+def create_user_credentials(user_credentials):
     if file_exist("user_credentials_file") != True:
         with open("user_credentials_file", "wb") as ud:
             pickle.dump(user_credentials, ud)
@@ -45,12 +56,12 @@ def screenshot():
 
 #enter the web and sign in
 
-def web_driver_sign_in(url, u_mail, u_password, driver):
+def web_driver_sign_in(url, u_email, u_password, driver):
     driver.get(url)
     sleep(3)
     email = driver.find_element("id", "login-email")
     password = driver.find_element("id", "login-password")
-    email.send_keys(u_mail)
+    email.send_keys(u_email)
     password.send_keys(u_password)
     password.send_keys(Keys.ENTER)
     sleep(3)
@@ -70,42 +81,85 @@ def web_driver_sign_in(url, u_mail, u_password, driver):
         print("Usuario o contraseña incorrectos")
         os.remove("user_credentials_file")
 
-def main(): 
+def main():
+    window = sg.Window("Prenotami", layout)
+
+    user_file = file_exist("user_credentials_file")
+
     #user is store in [0] and password is store in [1]
     user_credentials = []
-    #check if exist user_credentials_file and if it doesn't ask for the credentials
-    if file_exist("user_credentials_file") != True:
-        u_email = input("Ingrese el usuario:\n")
-        u_password = getpass("Ingrese la contraseña:\n")
-        user_credentials.append(u_email)
-        user_credentials.append(u_password)
-        pass
+
+    while True:
+        event, values = window.read()
+
+        if event == sg.WIN_CLOSED or event == "-stop-":
+            break
+            exit()
+
+        #check if exist user_credentials_file and if it doesn't ask for the credentials
+        if not user_file:     
+            
+            u_email = values["-user_email-"]
+            u_password = values["-user_password-"]
+            user_credentials.append(u_email)
+            user_credentials.append(u_password)
+            create_user_credentials(user_credentials)
+        else:
+
+            user_credentials = read_user_credentials()
+            
+            #the user is the e-mail and is store here:
+             
+            #the password is at least 8 characters and is store here:
+            
+
+        if event == "-start-":
+            window.Element("-start-").Update(disabled=True)
+            u_email = user_credentials[0]
+            u_password = user_credentials[1] 
+            print(starting_web_browser)
+
+            url = "https://prenotami.esteri.it/"
+            driver = webdriver.Firefox()
+
+            web_driver_sign_in(url, u_email, u_password, driver)
+
+            driver.close()
+                
+
+
+            
+        """
+        print(starting_web_browser)
+
+        url = "https://prenotami.esteri.it/"
+
+        
+        driver = webdriver.Firefox()
+
+        web_driver_sign_in(url, u_mail, u_password, driver)
+        """
+
+            
+            
+        
+            
+
+    window.close()  
+
+        
+    """
     else:
-        print("Usuario y Contraseña ingresados")
-        pass
+        window = sg.Window("Sniper Bot - Prnotami", layout2)
+        
+        while True:
+            event, values = window.read()
+            if event == sg.WIN_CLOSED or sg.Element("stop"):
+                break
 
-    
-    get_user_credentials(user_credentials)
+        window.close()
+    """
 
-    user_credentials = read_user_credentials()
-    
-    #the user is the e-mail and is store here:
-    u_mail = user_credentials[0]  
-    #the password is at least 8 characters and is store here:
-    u_password = user_credentials[1]
-    
-    print(starting_web_browser)
-
-    url = "https://prenotami.esteri.it/"
-
- 
-    driver = webdriver.Firefox()
-
-    web_driver_sign_in(url, u_mail, u_password, driver)
-
-    
-    
-    driver.close()
 
 
 
@@ -118,9 +172,10 @@ def main():
 if __name__ == "__main__":
     main()
     
-    schedule.every(24).hour.do(main)
+    schedule.every(24).hours.do(main)
 
     while True:
         schedule.run_pending()
         time.sleep(1)
+    
 
