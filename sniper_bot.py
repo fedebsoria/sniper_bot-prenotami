@@ -83,7 +83,7 @@ def web_driver_sign_in(url, u_email, u_password, driver, window):
         except Exception:
             window.Element("-display-").print("Algo salió mal o hay turno para el tramite. Seguro que algo salió mal.")  
     except Exception:
-        print("Usuario o contraseña incorrectos")
+        window.Element("-display-").print("Usuario o contraseña incorrectos")
         os.remove("user_credentials_file")
 
 def main():
@@ -103,8 +103,6 @@ def main():
         if event == sg.WIN_CLOSED or event == "-stop-":
             sys.exit()
             
-            
-        
         #check if there's ./user_credentials_file
         while user_file == True:
             #read the file
@@ -113,7 +111,7 @@ def main():
             #the user is the e-mail and is split here:
             u_email = user_credentials[0]
             u_password = user_credentials[1]
-           
+            print(u)
   
             #erase the ./user_credentials_file
             if event == "-Erase-":
