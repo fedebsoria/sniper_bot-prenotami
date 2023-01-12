@@ -107,13 +107,13 @@ def main():
         
         #check if there's ./user_credentials_file
         while user_file == True:
+            #read the file
             user_credentials = read_user_credentials()
                         
             #the user is the e-mail and is split here:
             u_email = user_credentials[0]
             u_password = user_credentials[1]
-            print(u_email)
-            print(u_password)
+           
   
             #erase the ./user_credentials_file
             if event == "-Erase-":
@@ -164,51 +164,6 @@ def main():
             web_driver_sign_in(url, u_email, u_password, driver, window)
 
             driver.close()
-
-        
-            
-                
-
-
-            
-        """
-        print(starting_web_browser)
-
-        url = "https://prenotami.esteri.it/"
-
-        
-        driver = webdriver.Firefox()
-
-        web_driver_sign_in(url, u_mail, u_password, driver)
-        """
-
-            
-            
-        
-            
-
-    window.close()  
-
-        
-    """
-    else:
-        window = sg.Window("Sniper Bot - Prnotami", layout2)
-        
-        while True:
-            event, values = window.read()
-            if event == sg.WIN_CLOSED or sg.Element("stop"):
-                break
-
-        window.close()
-    """
-
-
-
-
-    
-
-        
-
     
 
 if __name__ == "__main__":
