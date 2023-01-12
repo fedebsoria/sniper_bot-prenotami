@@ -81,10 +81,13 @@ def web_driver_sign_in(url, u_email, u_password, driver, window):
         try:
             screenshot_func(window)
         except Exception:
-            window.Element("-display-").print("Algo salió mal o hay turno para el tramite. Seguro que algo salió mal.")  
+            window.Element("-display-").print("Algo salió mal o hay turno para el tramite.\n Seguro que algo salió mal.\n Cerrar y volver a correr.\n")  
     except Exception:
         window.Element("-display-").print("Usuario o contraseña incorrectos")
         os.remove("user_credentials_file")
+        window.Element("-start-").update(disabled=False)
+        window.Element("-user_email-").Update(disabled=False)
+        window.Element("-user_password-").Update(disabled=False)
 
 def main():
     
@@ -111,7 +114,7 @@ def main():
             #the user is the e-mail and is split here:
             u_email = user_credentials[0]
             u_password = user_credentials[1]
-            print(u)
+            
   
             #erase the ./user_credentials_file
             if event == "-Erase-":
@@ -119,8 +122,7 @@ def main():
                 os.remove(user_file_path)
 
                 window.Element("-display-").print("Datos de usuario borrados\n")
-                break
-
+                pass
            
              #read the user_credentials_file in a list
 
@@ -129,7 +131,7 @@ def main():
                 window.Element("-user_email-").update(value=u_email)
                 window.Element("-user_password-").update(value=u_password)
                 window.Element("-display-").print("Datos obtenidos.\n")
-            break
+                break
 
                
         else:
