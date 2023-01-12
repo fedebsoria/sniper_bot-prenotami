@@ -23,9 +23,10 @@ user_credentials = []
 sg.theme('DarkAmber')
 
 layout = [ [sg.Text("Sniper bot para prenotami."),],
-           [sg.Text("Usuario:"), sg.InputText(key="-user_email-")],
-           [sg.Text("Contraseña:"), sg.InputText(password_char="*", key="-user_password-")],
-           [sg.Button("Empezar", key="-start-", button_color="green"), sg.Button("Cerrar", key="-stop-")]
+           [sg.Multiline("STARTING",key= "-display-",auto_refresh= True, autoscroll= True, size=(55, 4), text_color="green", background_color="black")],
+           [sg.Text("Usuario:     "), sg.InputText(key="-user_email-", text_color="black", background_color= "white")],
+           [sg.Text("Contraseña:"), sg.InputText(password_char="*", key="-user_password-", text_color="black", background_color= "white")],
+           [sg.Button("Empezar", key="-start-", button_color="green"), sg.Button("Cerrar", key="-stop-"),sg.Button("Ultimo Usuario", key="-l_user-"), sg.Button("Borrar Datos de Usuario", key="-Erase-", button_color="red")]
         ]
 
 
@@ -89,34 +90,49 @@ def main():
     #user is store in [0] and password is store in [1]
     user_credentials = []
 
+
     while True:
+        
         event, values = window.read()
+
+        if user_file == True:  
+                
+
+            user_credentials = read_user_credentials()
+            
+            #the user is the e-mail and is store here:
+            u_email = user_credentials[0]
+            u_password = user_credentials[1]
+            
+            window.Element("-user_email-").update(value=u_email)
+            window.Element("-user_password-").update(value=u_password)
+
+            window.refresh()
+                      
+
+        else:
+
+            u_email = values["-user_email-"]
+            u_password = values["-user_password-"]
+            user_credentials.append(u_email)
+            user_credentials.append(u_password)
+            create_user_credentials(user_credentials)
+        
+             
 
         if event == sg.WIN_CLOSED or event == "-stop-":
             break
             exit()
 
         #check if exist user_credentials_file and if it doesn't ask for the credentials
-        if not user_file:     
-            
-            u_email = values["-user_email-"]
-            u_password = values["-user_password-"]
-            user_credentials.append(u_email)
-            user_credentials.append(u_password)
-            create_user_credentials(user_credentials)
-        else:
-
-            user_credentials = read_user_credentials()
-            
-            #the user is the e-mail and is store here:
-             
-            #the password is at least 8 characters and is store here:
+        #the password is at least 8 characters and is store here:
             
 
         if event == "-start-":
-            window.Element("-start-").Update(disabled=True)
-            u_email = user_credentials[0]
-            u_password = user_credentials[1] 
+            window.Element("-start-").update(disabled=True)
+            window.Element("-user_email-").Update(disabled=True)
+            window.Element("-user_password-").Update(disabled=True)
+
             print(starting_web_browser)
 
             url = "https://prenotami.esteri.it/"
