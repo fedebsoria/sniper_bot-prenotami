@@ -9,7 +9,7 @@ from time import sleep
 
 import pyautogui
 import PySimpleGUI as sg
-import schedule
+#import schedule
 from pyautogui import screenshot
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -162,15 +162,19 @@ def main():
                 web_driver_sign_in(url, u_email, u_password, driver, window)
 
                 driver.close()
-    
+
+                #sleep(30)
+                while not event == sg.WIN_CLOSED or event == "-stop-":
+                    sleep(86400)
+                    url = "https://prenotami.esteri.it/"
+                    driver = webdriver.Firefox()
+
+                    web_driver_sign_in(url, u_email, u_password, driver, window)
+
+                    driver.close()
 
 if __name__ == "__main__":
     main()
     
-    schedule.every(24).hours.do(main)
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-    
 
