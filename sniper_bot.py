@@ -9,7 +9,6 @@ from time import sleep
 
 import pyautogui
 import PySimpleGUI as sg
-#import schedule
 from pyautogui import screenshot
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -88,7 +87,6 @@ def web_driver_sign_in(url, u_email, u_password, driver, window):
             window.Element("-display-").print("Algo salió mal o hay turno para el tramite.\n Seguro que algo salió mal.\n Cerrar y volver a correr.\n")  
     except Exception:
         window.Element("-display-").print("Usuario o contraseña incorrectos")
-        #os.remove("user_credentials_file")
         window.Element("-start-").update(disabled=False)
         window.Element("-user_email-").Update(disabled=False)
         window.Element("-user_password-").Update(disabled=False)
@@ -107,7 +105,7 @@ def main():
     
     user_credentials = read_user_credentials(user_file, user_credentials)
     if user_credentials != []:                        
-            #the user is the e-mail and is split here:
+            #the user is the e-mail and it is split here:
         u_email = user_credentials[0]
         u_password = user_credentials[1]
     else:
@@ -121,19 +119,15 @@ def main():
         #close the window and stop the script
         event, values = window.read()        
         if event == sg.WIN_CLOSED or event == "-stop-":
-            sys.exit()
-            
-        #check if there's ./user_credentials_file
-
-            
+            sys.exit()            
   
-            #erase the ./user_credentials_file.bin
+        #erase the ./user_credentials_file.bin
         if event == "-Erase-":
             os.remove(user_file)
             window.Element("-display-").print("Datos de usuario borrados\n")
             pass
            
-             #read the user_credentials_file in a list
+        #read the user_credentials_file in a list
         if event == "-l_user-":
             user_credentials = read_user_credentials(user_file, user_credentials)
             u_email = user_credentials[0]
@@ -148,6 +142,7 @@ def main():
                 u_password = values["-user_password-"]
                 user_credentials.append(u_email)
                 user_credentials.append(u_password)
+                #stores new user's credentials in a binary
                 write_user_credentials(user_credentials, user_file)
                 window.Element("-start-").update(disabled=True)
                 window.Element("-user_email-").Update(disabled=True)
@@ -158,12 +153,12 @@ def main():
 
                 url = "https://prenotami.esteri.it/"
                 driver = webdriver.Firefox()
-
+                #starts browser an makes the screenshot
                 web_driver_sign_in(url, u_email, u_password, driver, window)
 
                 driver.close()
 
-                #sleep(30)
+                #starts loop, every 24hs it will make an screenshot.
                 while not event == sg.WIN_CLOSED or event == "-stop-":
                     sleep(86400)
                     url = "https://prenotami.esteri.it/"
