@@ -159,14 +159,20 @@ def main():
                 driver.close()
 
                 #starts loop, every 24hs it will make an screenshot.
-                while not event == sg.WIN_CLOSED or event == "-stop-":
-                    sleep(86400)
-                    url = "https://prenotami.esteri.it/"
-                    driver = webdriver.Firefox()
+                while event != sg.WIN_CLOSED or event == "-stop-":
+                    try:
+                        #window.close()
+                        sleep(10)
+                        url = "https://prenotami.esteri.it/"
+                        driver = webdriver.Firefox()
 
-                    web_driver_sign_in(url, u_email, u_password, driver, window)
+                        web_driver_sign_in(url, u_email, u_password, driver, window)
 
-                    driver.close()
+                        driver.close()
+                    except Exception:
+                        break
+
+
 
 if __name__ == "__main__":
     main()
