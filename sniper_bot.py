@@ -159,7 +159,7 @@ def main():
                 driver.close()
 
                 #starts loop, every 24hs it will make an screenshot.
-                while event != sg.WIN_CLOSED or event == "-stop-":
+                while event != sg.WIN_CLOSED or event != "-stop-":
                     try:
                         #window.close()
                         sleep(10)
