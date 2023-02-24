@@ -83,6 +83,7 @@ def web_driver_sign_in(url, u_email, u_password, driver, window):
         no_appointment = driver.find_element(By.XPATH, "//*[contains(text(),'Al momento non ci sono date disponibili per il servizio richiesto')]")
         try:
             screenshot_func(window)
+            driver.close()
         except Exception:
             window.Element("-display-").print("Algo salió mal o hay turno para el tramite.\n Seguro que algo salió mal.\n Cerrar y volver a correr.\n")  
     except Exception:
@@ -156,13 +157,14 @@ def main():
                 #starts browser an makes the screenshot
                 web_driver_sign_in(url, u_email, u_password, driver, window)
 
-                driver.close()
+                
 
                 #starts loop, every 24hs it will make an screenshot.
+                
                 while event != sg.WIN_CLOSED or event != "-stop-":
                     try:
-                        #window.close()
                         sleep(10)
+                        window.close()
                         url = "https://prenotami.esteri.it/"
                         driver = webdriver.Firefox()
 
