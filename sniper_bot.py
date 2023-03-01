@@ -99,11 +99,14 @@ def web_driver_sign_in( u_email, u_password, window):
     return shoot_success
 
 #changes the buttons so they can't be used by the user. If not it'll only starts the daily loop
-def change_buttons(window):
-    window.Element("-stop-").Update(disabled=True, button_color="black")
-    window.Element("-l_user-").Update(disabled=True, button_color="black")
-    window.Element("-erase-").Update(disabled=True, button_color="black")
+def change_buttons_disabled(window, element_key):
+    window.Element(element_key).Update(disabled=True, button_color="black")
     window.refresh()
+
+#writes in the display a message
+def display_refresh(window, text):
+    window.Element("-display-").print(text)
+    window.refresh
 
 
 def main():
@@ -140,7 +143,8 @@ def main():
         #erase the ./user_credentials_file.bin
         if event in ("-Erase-"):
             os.remove(user_file)
-            window.Element("-display-").print("Datos de usuario borrados\n")
+            display_refresh(window, "Datos de usuario borrados\n")
+            #window.Element("-display-").print("Datos de usuario borrados\n")
             pass
            
         #read the user_credentials_file in a list
@@ -148,10 +152,12 @@ def main():
             user_credentials = read_user_credentials(user_file, user_credentials)
             u_email = user_credentials[0]
             u_password = user_credentials[1]
-            window.Element("-display-").print("Hay datos guardados\n")        
+            display_refresh(window, "Hay datos guardados\n")
+           # window.Element("-display-").print("Hay datos guardados\n")        
             window.Element("-user_email-").update(value=u_email)
             window.Element("-user_password-").update(value=u_password)
-            window.Element("-display-").print("Datos obtenidos.\n")
+            display_refresh(window, "Datos obtenidos.\n")
+            #window.Element("-display-").print("Datos obtenidos.\n")
             
         if event in ("-start-"):
             u_email = values["-user_email-"]
@@ -160,12 +166,17 @@ def main():
             user_credentials.append(u_password)
             #stores new user's credentials in a binary
             write_user_credentials(user_credentials, user_file)
-            change_buttons(window)
-            window.Element("-display-").print("Empezando...\n")
-            window.Element("-display-").print(starting_web_browser)
+            #disable the numbers
+            change_buttons_disabled(window, "-stop-")
+            change_buttons_disabled(window, "-l_user-")
+            change_buttons_disabled(window, "-erase-")
+            display_refresh(window, "Empezando...\n")
+            #window.Element("-display-").print("Empezando...\n")
+            display_refresh(window, starting_web_browser)
+            #window.Element("-display-").print(starting_web_browser)
             #starts browser an makes the screenshot
             shoot_success = web_driver_sign_in(u_email, u_password, window)
-            print(shoot_success)
+            #print(shoot_success)
             window.refresh()
 
         #starts loop, every 24hs it will make an screenshot.
@@ -177,9 +188,9 @@ def main():
             window.refresh()
 
             if event in ("-start-"):
-                print("funcionó")
+                #print("funcionó")
                 web_driver_sign_in(u_email, u_password, window)
-                print("finalizó la captura y espera")
+                #print("finalizó la captura y espera")
                 window.Read(timeout=(1000*60))
                 window.refresh()
             else:
