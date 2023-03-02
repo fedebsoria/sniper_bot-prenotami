@@ -75,7 +75,6 @@ def web_driver_sign_in( u_email, u_password, window):
     password.send_keys(u_password)
     password.send_keys(Keys.ENTER)
     sleep(10)
-    #log_in_error = driver.find_element("id", "login-password-error")
     try:
         prenota = driver.find_element("id", "advanced").click()
         sleep(10)
@@ -136,7 +135,7 @@ def main():
     
     while True:
         #close the window and stop the script
-        event, values = window.read()        
+        event, values = window.read() #type: ignore        
         if event in (sg.WIN_CLOSED, "-stop-"):
             sys.exit()            
   
@@ -144,7 +143,6 @@ def main():
         if event in ("-Erase-"):
             os.remove(user_file)
             display_refresh(window, "Datos de usuario borrados\n")
-            #window.Element("-display-").print("Datos de usuario borrados\n")
             pass
            
         #read the user_credentials_file in a list
@@ -152,12 +150,10 @@ def main():
             user_credentials = read_user_credentials(user_file, user_credentials)
             u_email = user_credentials[0]
             u_password = user_credentials[1]
-            display_refresh(window, "Hay datos guardados\n")
-           # window.Element("-display-").print("Hay datos guardados\n")        
+            display_refresh(window, "Hay datos guardados\n")      
             window.Element("-user_email-").update(value=u_email)
             window.Element("-user_password-").update(value=u_password)
             display_refresh(window, "Datos obtenidos.\n")
-            #window.Element("-display-").print("Datos obtenidos.\n")
             
         if event in ("-start-"):
             u_email = values["-user_email-"]
@@ -171,12 +167,9 @@ def main():
             change_buttons_disabled(window, "-l_user-")
             change_buttons_disabled(window, "-erase-")
             display_refresh(window, "Empezando...\n")
-            #window.Element("-display-").print("Empezando...\n")
             display_refresh(window, starting_web_browser)
-            #window.Element("-display-").print(starting_web_browser)
             #starts browser an makes the screenshot
             shoot_success = web_driver_sign_in(u_email, u_password, window)
-            #print(shoot_success)
             window.refresh()
 
         #starts loop, every 24hs it will make an screenshot.
@@ -188,10 +181,8 @@ def main():
             window.refresh()
 
             if event in ("-start-"):
-                #print("funcionó")
                 web_driver_sign_in(u_email, u_password, window)
-                #print("finalizó la captura y espera")
-                window.Read(timeout=(1000*60))
+                window.Read(timeout=(1000))
                 window.refresh()
             else:
                 break
