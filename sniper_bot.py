@@ -89,11 +89,14 @@ def web_driver_sign_in( u_email, u_password, window):
             driver.close()
         except Exception:
             window.Element("-display-").print("Algo salió mal o hay turno para el tramite.\n Seguro que algo salió mal.\n Cerrar y volver a correr.\n")  
+            driver.close()
     except Exception:
         window.Element("-display-").print("Usuario o contraseña incorrectos")
         window.Element("-start-").update(disabled=False)
         window.Element("-user_email-").Update(disabled=False)
         window.Element("-user_password-").Update(disabled=False)
+        window.Element("-stop-").Update(disabled=False, button_color='red')
+        driver.close()
     
     return shoot_success
 
